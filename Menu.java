@@ -5,8 +5,8 @@
 package com.mycompany._prog1;
 
 /**
- *
- * @author scorn
+ * Menu
+ * Player_Menu: New game, load game, or player vs player
  */
 public class Menu {
     public Menu(){}
