@@ -6,9 +6,10 @@ package com.mycompany._prog1;
 
 /**
  * Battle
- * Attacks: Creates the attacks and defense choices
+ * All_Attacks: Creates the attacks and defense choices  [This will create the each possible attack]
  * Attributes: This gives each fighter their values for damages and defensive stats 
- * Choices: This can be different attack options or defending options based on the decision 
+ * Players_Choices: This can be different attack options or defending options based on the decision 
+ * [This will use All_Attacks, but will be just the availble attacks for each fighter]
  *that the player/AI chooses.
  */
 public class Fighter {
