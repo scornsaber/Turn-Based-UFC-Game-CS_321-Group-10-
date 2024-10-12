@@ -5,8 +5,8 @@
 package com.mycompany._prog1;
 
 /**
- *
- * @author scorn
+ * TBD at future date
+ * 
  */
 public class Story_Mode {
     public Story_Mode(){}
