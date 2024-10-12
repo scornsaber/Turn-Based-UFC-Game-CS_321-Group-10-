@@ -5,8 +5,8 @@
 package com.mycompany._prog1;
 
 /**
- *
- * @author scorn
+ * Place Holder
+ * 
  */
 public class NewClass extends Fighter {
     
