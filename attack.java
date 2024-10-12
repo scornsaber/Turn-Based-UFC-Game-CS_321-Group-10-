@@ -5,8 +5,8 @@
 package com.mycompany._prog1;
 
 /**
- *
- * @author scorn
+ * This class extention will hold attack options,
+ * Including but not limited to; punch, kick, block...
  */
 public class attack extends Fighter {
     
