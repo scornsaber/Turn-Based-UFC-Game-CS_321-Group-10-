@@ -13,5 +13,25 @@ package com.mycompany._prog1;
  *that the player/AI chooses.
  */
 public class Fighter {
-    
+    //Attributes
+    private string fighterName="";
+    private int countryOfOrigin=0;
+    private int hp=100;
+    private int energy=100;
+    private int fitness=0;
+    private int recovery=0;
+    private int attack=0;
+    private int defense=0;
+    private int speed=0;
+    ////Constructers
+    //Base Constructer
+    public Fighter()
+    {
+
+    }
+    //Parameterized Constructers
+    public Fighter()
+    {
+
+    }
 }
