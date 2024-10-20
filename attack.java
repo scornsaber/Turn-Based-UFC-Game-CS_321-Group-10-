@@ -9,6 +9,7 @@ package com.mycompany._prog1;
  * Including but not limited to; punch, kick, block...
  */
 public class attack extends Fighter {
+    // Placeholder for calling fighter constructor when initilizing class
     public Attack(String name, double health, double stamina) {
         super(name, health, stamina);
     }
