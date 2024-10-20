@@ -8,6 +8,6 @@ package com.mycompany._prog1;
  * Place Holder
  * 
  */
-public class update extends Fighter {
+public class newclass extends Fighter {
     
 }
