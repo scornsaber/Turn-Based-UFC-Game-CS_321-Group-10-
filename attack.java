@@ -9,5 +9,23 @@ package com.mycompany._prog1;
  * Including but not limited to; punch, kick, block...
  */
 public class attack extends Fighter {
+    public Attack(String name, double health, double stamina) {
+        super(name, health, stamina);
+    }
+
+    // Punch attack method
+    public double punch() {
+        double damage = 10.0;
+        double staminaCost = 5.0;
+    }
+
+    // Kick attack method
+    public double kick() {
+        double damage = 15.0;
+        double staminaCost = 7.0;
+    }
+
+    // Additional attack options like grappling, blocking, etc., can be added here.
+}
     
 }
