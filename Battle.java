@@ -25,7 +25,8 @@ public class Battle {
 
         //Loop body is just a for instance/place holder
         while (battleOngoing) {
-            double damageDealt = fighter1.attack(fighter2);
+            double damageDealt = fighter1.punch();
+            fighter2.update(damageDealt);
             System.out.println(fighter1.getName() + " attacks " + fighter2.getName() + " dealing " + damageDealt + " damage!");
         }
 
@@ -36,7 +37,8 @@ public class Battle {
             }
 
             // Fighter 2 attacks Fighter 1
-            damageDealt = fighter2.attack(fighter1);
+            double damageDealt = fighter2.kick();
+            fighter1.update(damageDealt);
             System.out.println(fighter2.getName() + " attacks " + fighter1.getName() + " dealing " + damageDealt + " damage!");
             System.out.println(fighter1.getName() + "'s health: " + fighter1.getHealth());
 
