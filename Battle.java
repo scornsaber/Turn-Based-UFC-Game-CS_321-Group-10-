@@ -10,11 +10,11 @@ package com.mycompany._prog1;
  *attack/defense
  */
 public class Battle {
-    private Fighter fighter1;
-    private Fighter fightet2;
+    private attack fighter1;
+    private attack fightet2;
 
     // Constructer
-    public Battle(Fighter fighter1, Fighter fighter2) {
+    public Battle(attack fighter1, attack fighter2) {
         this.fighter1 = fighter1;
         this.fighter2 = fighter2;
         
