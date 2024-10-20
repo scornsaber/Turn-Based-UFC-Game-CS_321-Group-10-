@@ -34,4 +34,13 @@ public class Fighter {
     {
 
     }
+
+
+    // Placeholder method to update health when damage is taken
+    public void update(double damage) {
+        this.health -= damage;
+        if (this.health < 0) {
+            this.health = 0;
+        }
+    }
 }
