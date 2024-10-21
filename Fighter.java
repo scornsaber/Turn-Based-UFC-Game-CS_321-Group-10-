@@ -23,6 +23,12 @@ public class Fighter {
     private int attack=0;
     private int defense=0;
     private int speed=0;
+    private int block=0;
+    private int grapple=0;
+    //Invisible Stats
+    private int grappleResistance=0;
+    private int dodge =0;
+    private int strongAttack=0;
     ////Constructers
     //Base Constructer
     public Fighter()
