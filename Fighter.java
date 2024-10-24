@@ -129,6 +129,10 @@ public class Fighter {
   public int GetAttackSpeed(Attack attackChoice, Limb limb) // Gets speed of a certain Attack by this fighter.
   {                                                         // Used in Battle class.
     int attackSpeed = (int) Math.round(speed * attackChoice.GetSpeedMod(limb));
+    if (isBurntOut == true)
+    {
+      attackSpeed *= 0.5; // Speed is halved if user is burnt out.
+    }
     if (attackSpeed < 1) // This should never happen.
     {
       attackSpeed = 1;
