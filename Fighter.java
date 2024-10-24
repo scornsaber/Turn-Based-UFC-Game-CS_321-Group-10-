@@ -125,8 +125,21 @@ public class Fighter {
     if (damage < 1) {damage = 1;}
     return damage;                // Returns damage to Battle, which then applies it to Fighters in the correct order.
   }
-}
 
+
+  
+  // I only use the below function in personal tests. Will be removing later.
+  public long AttackTest(int userAttack, int targetDefense, double attackModifier)
+  {
+    final int DAMAGECONSTANT = 5;
+    long damage = 0; // Output variable
+    
+    damage = Math.round((((13*userAttack)-(8*targetDefense))/DAMAGECONSTANT)*attackModifier);
+    if (damage < 1) {damage = 1;}
+    return damage;
+  }
+  
+}
 
 
 
