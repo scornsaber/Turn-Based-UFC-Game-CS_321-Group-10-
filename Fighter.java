@@ -61,6 +61,17 @@ public class Fighter {
   {
     return HP;
   }
+  public void SetMaxHP() // For use after Battle finishes.
+  {
+    HP = baseHP;
+  }
+  public int DealDamage(int damage) // Subtracts damage from HP, returns HP.
+  {
+    HP = HP - damage;
+    if (HP<0) {HP = 0;}
+    return HP;
+  }
+  
   public int GetDefense()
   {
     return defense;
@@ -87,30 +98,30 @@ public class Fighter {
     isBurntOut = input;
   }
   
-  public long DoAttack(Attack attackChoice, Fighter target, Limb limb) // Calculates damage dealt, returns value as long int.
-  {                                                                    // This will be updated later to return an int, not a long.
-    long damage = 1; // Default value for initialization.
+  public int DoAttack(Attack attackChoice, Fighter target, Limb limb) // Calculates damage dealt, returns value as long int.
+  {
+    int damage = 1; // Default value for initialization.
     
     // First, calculate effective modifiers for each.
-    long effectiveAttack = attack;
+    double effectiveAttack = attack;
     if (attackChoice.GetDamageMod(limb)>1.0) // Chosen attack is a strong attack.
     {
-      effectiveAttack = Math.round(attack + (strongAttack * 0.05));
+      effectiveAttack = attack + (strongAttack * 0.05);
     }
     if (isBurntOut == true) // Attack is halved if player is burnt out.
     {
-      effectiveAttack = Math.round(effectiveAttack * 0.5);
+      effectiveAttack = effectiveAttack * 0.5;
     }
-    long effectiveDefense = target.GetDefense();
+    double effectiveDefense = target.GetDefense();
     if (target.GetBlock() == true)
     {
-      effectiveDefense = Math.round(effectiveDefense*(target.GetBlockMod() - (0.1*chip)));
+      effectiveDefense = effectiveDefense*(target.GetBlockMod() - (0.1*chip));
     }
     
     // Now do the calculations.
     final int DAMAGECONSTANT = 5; // Arbitrary number used in video game damage functions.
                                   // 5 was found empirically to be the msot effective for this game.
-    damage = Math.round((((13*effectiveAttack)-(8*effectiveDefense))/DAMAGECONSTANT)*attackChoice.GetDamageMod(limb));
+    damage = (int) Math.round((((13*effectiveAttack)-(8*effectiveDefense))/DAMAGECONSTANT)*attackChoice.GetDamageMod(limb));
     if (damage < 1) {damage = 1;}
     return damage;                // Returns damage to Battle, which then applies it to Fighters in the correct order.
   }
