@@ -12,6 +12,124 @@ package com.mycompany._prog1;
  * [This will use All_Attacks, but will be just the available attacks for each fighter]
  *that the player/AI chooses.
  */
+
+
+
+import java.lang.Math;
+
+public class Fighter {
+  
+  private String name = "";
+  private int baseHP = 100; // Default value. Might change depending on character creation.
+  private int HP = baseHP;
+  private static final int baseEnergy = 100; // Base value for all Fighters. Cannot be changed.
+  private int energy = baseEnergy;
+  private static final int DEFAULTSTAT = 20; // Minimum value for most stats. Used when player is Level 1.
+  private int attack = DEFAULTSTAT;
+  private int defense = DEFAULTSTAT;
+  private int speed = DEFAULTSTAT;
+  
+  private int fitness=DEFAULTSTAT;    // Will affect stamina cost of attacks.
+  private int recovery=DEFAULTSTAT;   // Affects stamina recovery rate.
+  
+  private int chip = 0;               // Increases damage dealt on blocking target.
+  private int block = 0;              // Decreases damage taken while blocking.
+  private int grapple = 0;            // Increases efficacy of grapples. (NOT YET IMPLEMENTED)
+  private int dodge = 0;              // Decreases energy cost of dodging.
+  //Invisible Stats
+  private int grappleResistance = 0;  // These are more specific values, so
+  private int strongAttack = 0;       // they start at 0 and are raised only through
+                                      // level-ups.
+  
+  private boolean isBlocking = false;
+  private boolean isBurntOut = false; // Handled in Battle. Fighter becomes burnt out if they reach
+                                      // 0 energy. Damage and defense are drastically reduced when
+                                      // burnt out, so energy management is essential to combat.
+  
+  public Fighter(String inName)       // Basic constructor. Will update later.
+  {
+    name = inName;
+  }
+  
+  
+  public static void CreateFighter(Fighter newFighter) // Not yet implemented.
+  {
+    
+  }
+  
+  public int GetHP()
+  {
+    return HP;
+  }
+  public int GetDefense()
+  {
+    return defense;
+  }
+  public boolean GetBlock()
+  {
+    return isBlocking;
+  }
+  public double GetBlockMod()  // If Fighter is blocking, damage taking is significantly reduced.
+  {
+    return 3.0 + (0.05*block); // Base damage reduction of 3x, and this reduction is increased by 0.05x
+                               // for every point invested in Fighters' "block" skill.
+  }
+  public void SetBlock(boolean input) // Handled by Battle class.
+  {
+    isBlocking = input;
+  }
+  public boolean GetBurnout()         // Burnout is handled completely by Battle class.
+  {
+    return isBurntOut;
+  }
+  public void SetBurnout(boolean input)
+  {
+    isBurntOut = input;
+  }
+  
+  public long DoAttack(Attack attackChoice, Fighter target, Limb limb) // Calculates damage dealt, returns value as long int.
+  {                                                                    // This will be updated later to return an int, not a long.
+    long damage = 1; // Default value for initialization.
+    
+    // First, calculate effective modifiers for each.
+    long effectiveAttack = attack;
+    if (attackChoice.GetDamageMod(limb)>1.0) // Chosen attack is a strong attack.
+    {
+      effectiveAttack = Math.round(attack + (strongAttack * 0.05));
+    }
+    if (isBurntOut == true) // Attack is halved if player is burnt out.
+    {
+      effectiveAttack = Math.round(effectiveAttack * 0.5);
+    }
+    long effectiveDefense = target.GetDefense();
+    if (target.GetBlock() == true)
+    {
+      effectiveDefense = Math.round(effectiveDefense*(target.GetBlockMod() - (0.1*chip)));
+    }
+    
+    // Now do the calculations.
+    final int DAMAGECONSTANT = 5; // Arbitrary number used in video game damage functions.
+                                  // 5 was found empirically to be the msot effective for this game.
+    damage = Math.round((((13*effectiveAttack)-(8*effectiveDefense))/DAMAGECONSTANT)*attackChoice.GetDamageMod(limb));
+    if (damage < 1) {damage = 1;}
+    return damage;                // Returns damage to Battle, which then applies it to Fighters in the correct order.
+  }
+}
+
+
+
+
+
+
+
+// Old contents below for tracking changes. 
+// I (Ethan Watts) completely reworked the class before properly
+// linking GitHub and NetBeans, so the above information was just
+// copy-pasted from a test project on my personal computer.
+
+
+
+/*
 public class Fighter {
     //Attributes
     private string fighterName="";
@@ -50,3 +168,4 @@ public class Fighter {
         }
     }
 }
+*/
