@@ -98,7 +98,7 @@ public class Fighter {
     isBurntOut = input;
   }
   
-  public int DoAttack(Attack attackChoice, Fighter target, Limb limb) // Calculates damage dealt, returns value as long int.
+  public int GetAttackDamage(Attack attackChoice, Fighter target, Limb limb) // Calculates damage dealt, returns value as long int.
   {
     int damage = 1; // Default value for initialization.
     
@@ -124,6 +124,16 @@ public class Fighter {
     damage = (int) Math.round((((13*effectiveAttack)-(8*effectiveDefense))/DAMAGECONSTANT)*attackChoice.GetDamageMod(limb));
     if (damage < 1) {damage = 1;}
     return damage;                // Returns damage to Battle, which then applies it to Fighters in the correct order.
+  }
+  
+  public int GetAttackSpeed(Attack attackChoice, Limb limb) // Gets speed of a certain Attack by this fighter.
+  {                                                         // Used in Battle class.
+    int attackSpeed = (int) Math.round(speed * attackChoice.GetSpeedMod(limb));
+    if (attackSpeed < 1) // This should never happen.
+    {
+      attackSpeed = 1;
+    }
+    return attackSpeed;
   }
 
 
