@@ -8,7 +8,15 @@ package com.mycompany._prog1;
  * TBD at future date
  * 
  */
-public class Story_Mode {
-    public Story_Mode(){}
-    
+public class Story_Mode 
+{
+    public Story_Mode()
+    {
+        ArrayList<Fighter> opponents = new ArrayList<Fighter>();
+        fillOpponents();
+    }
+    public void fillOpponents ()
+    {
+        opponents.add(Fighter("Bob"));
+    }
 }
