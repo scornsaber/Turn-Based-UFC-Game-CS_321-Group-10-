@@ -68,7 +68,7 @@ public class Menu extends JFrame {
     topPanel.add(buttonPanel, BorderLayout.CENTER);
 
     // Load and scale the image to the screen size
-    ImageIcon imageIcon = new ImageIcon("/Users/reecemilligan/Desktop/mainmenu.png");
+    ImageIcon imageIcon = new ImageIcon("https://github.com/scornsaber/Turn-Based-UFC-Game-CS_321-Group-10-/blob/Reece_Milligan/mainmenu.png");
     Image image = imageIcon.getImage().getScaledInstance(getScreenWidth(), getScreenHeight(), Image.SCALE_SMOOTH);
     imageLabel = new JLabel(new ImageIcon(image));
 
