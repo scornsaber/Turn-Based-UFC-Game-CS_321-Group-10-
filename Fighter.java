@@ -152,7 +152,104 @@ public class Fighter {
     if (damage < 1) {damage = 1;}
     return damage;
   }
-  
+
+   // Method to save fighter's information to a file added by Caleb
+    public void saveToFile(String fileName) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+            writer.write("Name: " + name + "\n");
+            writer.write("HP: " + HP + "\n");
+            writer.write("Energy: " + energy + "\n");
+            writer.write("Attack: " + attack + "\n");
+            writer.write("Defense: " + defense + "\n");
+            writer.write("Speed: " + speed + "\n");
+            writer.write("Fitness: " + fitness + "\n");
+            writer.write("Recovery: " + recovery + "\n");
+            writer.write("Chip: " + chip + "\n");
+            writer.write("Block: " + block + "\n");
+            writer.write("Grapple: " + grapple + "\n");
+            writer.write("Dodge: " + dodge + "\n");
+            writer.write("GrappleResistance: " + grappleResistance + "\n");
+            writer.write("StrongAttack: " + strongAttack + "\n");
+            writer.write("IsBlocking: " + isBlocking + "\n");
+            writer.write("IsBurntOut: " + isBurntOut + "\n");
+            System.out.println("Fighter information saved to " + fileName);
+        } catch (IOException e) {
+            System.out.println("An error occurred while saving fighter information.");
+            e.printStackTrace();
+        }
+    }
+
+    // Static method to load fighter's information from a file
+    public static Fighter loadFromFile(String fileName) {
+        Fighter loadedFighter = new Fighter("");
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(": ");
+                switch (parts[0]) {
+                    case "Name":
+                        loadedFighter.name = parts[1];
+                        break;
+                    case "HP":
+                        loadedFighter.HP = Integer.parseInt(parts[1]);
+                        break;
+                    case "Energy":
+                        loadedFighter.energy = Integer.parseInt(parts[1]);
+                        break;
+                    case "Attack":
+                        loadedFighter.attack = Integer.parseInt(parts[1]);
+                        break;
+                    case "Defense":
+                        loadedFighter.defense = Integer.parseInt(parts[1]);
+                        break;
+                    case "Speed":
+                        loadedFighter.speed = Integer.parseInt(parts[1]);
+                        break;
+                    case "Fitness":
+                        loadedFighter.fitness = Integer.parseInt(parts[1]);
+                        break;
+                    case "Recovery":
+                        loadedFighter.recovery = Integer.parseInt(parts[1]);
+                        break;
+                    case "Chip":
+                        loadedFighter.chip = Integer.parseInt(parts[1]);
+                        break;
+                    case "Block":
+                        loadedFighter.block = Integer.parseInt(parts[1]);
+                        break;
+                    case "Grapple":
+                        loadedFighter.grapple = Integer.parseInt(parts[1]);
+                        break;
+                    case "Dodge":
+                        loadedFighter.dodge = Integer.parseInt(parts[1]);
+                        break;
+                    case "GrappleResistance":
+                        loadedFighter.grappleResistance = Integer.parseInt(parts[1]);
+                        break;
+                    case "StrongAttack":
+                        loadedFighter.strongAttack = Integer.parseInt(parts[1]);
+                        break;
+                    case "IsBlocking":
+                        loadedFighter.isBlocking = Boolean.parseBoolean(parts[1]);
+                        break;
+                    case "IsBurntOut":
+                        loadedFighter.isBurntOut = Boolean.parseBoolean(parts[1]);
+                        break;
+                }
+            }
+            System.out.println("Fighter information loaded from " + fileName);
+        } catch (IOException e) {
+            System.out.println("An error occurred while loading fighter information.");
+            e.printStackTrace();
+        }
+        return loadedFighter;
+    }
+
+    // Example of how to save and load fighter
+    //Fighter fighter = new Fighter("John Doe");
+    //fighter.saveToFile("fighter.txt");
+    //Fighter loadedFighter = Fighter.loadFromFile("fighter.txt");
+    //System.out.println("Loaded Fighter: " + loadedFighter.getName())
 }
 
 
