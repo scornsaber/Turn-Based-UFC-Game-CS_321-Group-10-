@@ -13,7 +13,8 @@ public class Battle {
     private attack fighter1;
     private attack fightet2;
 
-    // Constructer
+    // VSCode Update Test 4:35PM
+    // Constructor
     public Battle(attack fighter1, attack fighter2) {
         this.fighter1 = fighter1;
         this.fighter2 = fighter2;
