@@ -13,7 +13,7 @@ public class Battle {
     private attack fighter1;
     private attack fightet2;
     
-    // Update test 3
+    // Update test 2:50PM Tuesday
     // Constructor
     public Battle(attack fighter1, attack fighter2) {
         this.fighter1 = fighter1;
