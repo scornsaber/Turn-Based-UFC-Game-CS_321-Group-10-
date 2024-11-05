@@ -20,7 +20,8 @@ import java.lang.Math;
 public class Fighter {
   
   private String name = "";
-  private int baseHP = 100; // Default value. Might change depending on character creation.
+  private Country countryOfOrigin = USA;  // Default value. Determined in parameterized constructor.
+  private int baseHP = 100;           // Default value. Might change depending on character creation.
   private int HP = baseHP;
   private static final int baseEnergy = 100; // Base value for all Fighters. Cannot be changed.
   private int energy = baseEnergy;
@@ -51,7 +52,36 @@ public class Fighter {
     name = inName;
   }
   
+  //Parameterized constructor:
+  public Fighter(String inName, Country country, int force, int intelligence, int grit, int hold, int technique, int execution, int resilience)
+  {
+    // The input values come from the level up points (F.I.G.H.T.E.R.)
+    // These values add to the character's base stats, as written below.
+    /*
+    F	Force			(Attack+2, Chip+1)                  Increases damage and chip damage.
+    I	Intelligence	(Recovery+3, grappleResist+1)   Increases energy regeneration and grapple escape chance.
+    G	Grit			(Defense+3,ChipResist+1)            Decreases all damage taken.
+    H	Hold			(Grapple+3)                         Grapples more likely to succeed, and do more damage.
+    T	Technique		(Speed+2, Dodge+1)                Attack faster, dodging uses less energy
+    E	Execution		(Fitness+3, StrongAttacks+1)      Attacks use less energy. Strong attacks do slightly more damage.
+    R	Resilience		(Block+3,chipResist+2)          Decreases chip damage taken. Blocking is more effective. (Lower chance of failure on repeats)
+    */
+   
+    name = inName;
+    countryOfOrigin = country;
+    
+    // Stat allocation:
+    attack += 2*force;            chip ++ force;                  // Force
+    recovery += 3*intelligence;   grappleResist += intelligence;  // Intelligence
+    defense += 3*grit;            chipResist += grit;             // Grit
+    grapple += 3*hold;                                            // Hold
+    speed += 2*technique;         dodge += technique;             // Technique
+    fitness += 3*execution;       strongAttack += execution;      // Execution
+    block += 3*resilience;        chipResist += 2*resilience;     // Resilience
+
+  }
   
+
   public static void CreateFighter(Fighter newFighter) // Not yet implemented.
   {
     
@@ -61,9 +91,10 @@ public class Fighter {
   {
     return HP;
   }
-  public void SetMaxHP() // For use after Battle finishes.
+  public void ResetFighter() // For use after Battle finishes.
   {
     HP = baseHP;
+    energy = baseEnergy;
   }
   public int DealDamage(int damage) // Subtracts damage from HP, returns HP.
   {

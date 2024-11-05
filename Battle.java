@@ -7,22 +7,21 @@ package com.mycompany._prog1;
 /**
  * Battle
  * Fight Choice: Intiate one of the choices from the fighter class that is 
- *attack/defense
+ * attack/defense
  */
 public class Battle {
-    private attack fighter1;
-    private attack fightet2;
+    private Fighter fighter1;
+    private Fighter fightet2;
 
-    // VSCode Update Test 4:35PM
     // Constructor
-    public Battle(attack fighter1, attack fighter2) {
+    public Battle(Fighter fighter1, Fighter fighter2) {
         this.fighter1 = fighter1;
         this.fighter2 = fighter2;
         
     }
-    public void BeginBattle(){
-        System.out.println("Battle begin message");
-        boolean battleOngoing = true;
+    public void DoBattle(){   
+        System.out.println("Battle begin message");     //1234
+        boolean battleOngoing = true;                                
 
         //Loop body is just a for instance/place holder
         while (battleOngoing) {
