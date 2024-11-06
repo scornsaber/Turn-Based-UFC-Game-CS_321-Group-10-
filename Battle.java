@@ -11,20 +11,25 @@ package com.mycompany._prog1;
  */
 public class Battle {
     private Fighter fighter1;
-    private Fighter fightet2;
+    private Fighter fighter2;
+    private Arena location;
 
     // Constructor
-    public Battle(Fighter fighter1, Fighter fighter2) {
+    public Battle(Fighter fighter1, Fighter fighter2, Arena arena) {
         this.fighter1 = fighter1;
         this.fighter2 = fighter2;
-        
+        this.location = arena;
     }
-    public void DoBattle(){   
-        System.out.println("Battle begin message");     //1234
-        boolean battleOngoing = true;                                
+    public void DoBattle(){                           // Changed name from BeginBattle() to DoBattle
+        double fighter1speed = 0.0; // Speed values are determined each turn depending on user stats & attack choice
+        double fighter2speed = 0.0;
+        System.out.println("Battle begin message");
+        boolean battleOngoing = true;                              
 
         //Loop body is just a for instance/place holder
         while (battleOngoing) {
+            
+            
             double damageDealt = fighter1.punch();
             fighter2.update(damageDealt);
             System.out.println(fighter1.getName() + " attacks " + fighter2.getName() + " dealing " + damageDealt + " damage!");

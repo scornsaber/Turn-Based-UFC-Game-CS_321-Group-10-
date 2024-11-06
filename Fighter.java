@@ -129,6 +129,12 @@ public class Fighter {
     isBurntOut = input;
   }
   
+  public Attack GetAttackChoice() // This will be implented later and handled in GUI.
+  {
+    defaultAttack = Attack();     // PLACEHOLDER VALUE. WILL NOT BE PRESENT IN FINAL FUNCTION.
+    return defaultAttack;
+  }
+
   public int GetAttackDamage(Attack attackChoice, Fighter target, Limb limb) // Calculates damage dealt, returns value as long int.
   {
     int damage = 1; // Default value for initialization.

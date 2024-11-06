@@ -14,6 +14,11 @@ public class Attack {
   private double baseDamageMod = DEFAULTMODIFIER;
   private double baseSpeedMod = DEFAULTMODIFIER;
   
+  public Attack() // Default constructor only for use in debugging.
+  {
+    name = "Default Attack";
+  }
+
   public Attack(String inName, double damageMod, double speedMod)
   {
     name = inName;
