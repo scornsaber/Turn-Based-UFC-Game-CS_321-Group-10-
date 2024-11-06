@@ -81,7 +81,10 @@ public class Fighter {
 
   }
   
-
+  public string GetName()
+  {
+    return name;
+  }
   public static void CreateFighter(Fighter newFighter) // Not yet implemented.
   {
     
@@ -129,10 +132,10 @@ public class Fighter {
     isBurntOut = input;
   }
   
-  public Attack GetAttackChoice() // This will be implented later and handled in GUI.
+  public void GetAttackChoice(Attack &attackChoice, Limb &limbChoice) // This will be implented later and handled in GUI.
   {
-    defaultAttack = Attack();     // PLACEHOLDER VALUE. WILL NOT BE PRESENT IN FINAL FUNCTION.
-    return defaultAttack;
+    attackChoice = Attack();  // PLACEHOLDER VALUE. WILL NOT BE PRESENT IN FINAL FUNCTION.
+    limbPtr = ARM;            // PLACEHOLDER VALUE. WILL BE DIFFERENT IN FINAL FUNCTION.
   }
 
   public int GetAttackDamage(Attack attackChoice, Fighter target, Limb limb) // Calculates damage dealt, returns value as long int.

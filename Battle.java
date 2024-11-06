@@ -21,22 +21,54 @@ public class Battle {
         this.location = arena;
     }
     public void DoBattle(){                           // Changed name from BeginBattle() to DoBattle
-        double fighter1speed = 0.0; // Speed values are determined each turn depending on user stats & attack choice
-        double fighter2speed = 0.0;
+        double fighter1Speed = 0.0; // Speed values are determined each turn depending on user stats & attack choice
+        double fighter2Speed = 0.0;
+        Attack fighter1Attack = Attack(); // Default initialization value.
+        Attack fighter2Attack = Attack();
+        Limb fighter1Limb;
+        Limb fighter2Limb;
+
+        Fighter* faster = null;
+        Fighter* slower = null;
         System.out.println("Battle begin message");
         boolean battleOngoing = true;                              
 
         //Loop body is just a for instance/place holder
         while (battleOngoing) {
-            
-            
+            // First, get each Fighter's attack choice. This will be handled in GUI.
+            fighter1Attack = fighter1.GetAttackChoice(fighter1Attack, fighter1Limb);
+            fighter2Attack = fighter2.GetAttackChoice(fighter2Attack, fighter2Limb);
+
+            // Calculate each Fighter's speed this turn.
+            fighter1Speed = fighter1.GetAttackSpeed(fighter1Attack, fighter1Limb)
+            fighter2Speed = fighter1.GetAttackSpeed(fighter2Attack, fighter2Limb)
+
+            // Designate faster and slower fighter for THIS TURN ONLY.
+            if (fighter1Speed > fighter2Speed)
+            {
+              *faster = fighter1;
+              *slower = fighter2;
+            }
+            else if (fighter2Speed > fighter1Speed)
+            {
+              *faster = fighter2;
+              *slower = fighter1;
+            }
+            else // Speed tie this turn.
+            {
+              // This will eventually be implemented as a random function to choose between the two.
+              // For now it will just choose fighter1.
+              *faster = fighter1;
+              *slower = fighter2;
+            }
+
             double damageDealt = fighter1.punch();
             fighter2.update(damageDealt);
-            System.out.println(fighter1.getName() + " attacks " + fighter2.getName() + " dealing " + damageDealt + " damage!");
+            System.out.println(fighter1.GetName() + " attacks " + fighter2.GetName() + " dealing " + damageDealt + " damage!");
         }
 
             if (fighter2.getHealth() <= 0) {
-                System.out.println(fighter1.getName() + " wins the battle!");
+                System.out.println(fighter1.GetName() + " wins the battle!");
                 battleOngoing = false;
                 break;
             }
@@ -44,7 +76,7 @@ public class Battle {
             // Fighter 2 attacks Fighter 1
             double damageDealt = fighter2.kick();
             fighter1.update(damageDealt);
-            System.out.println(fighter2.getName() + " attacks " + fighter1.getName() + " dealing " + damageDealt + " damage!");
+            System.out.println(fighter2.GetName() + " attacks " + fighter1.getName() + " dealing " + damageDealt + " damage!");
             System.out.println(fighter1.getName() + "'s health: " + fighter1.getHealth());
 
             if (fighter1.getHealth() <= 0) {
