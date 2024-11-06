@@ -99,16 +99,15 @@ public class Fighter {
   {
     return HP;
   }
-  public void ResetFighter() // For use after Battle finishes.
+  public void Restore() // For use after Battle finishes.
   {
     HP = baseHP;
     energy = baseEnergy;
   }
-  public int DealDamage(int damage) // Subtracts damage from HP, returns HP.
-  {
+  public void DealDamage(int damage)  // Subtracts damage from HP.
+  {                                   // Update 6th November 3:06PM: Ethan Watts changed return type from int to void.
     HP = HP - damage;
     if (HP<0) {HP = 0;}
-    return HP;
   }
   
   public int GetDefense()
@@ -149,7 +148,7 @@ public class Fighter {
     limbPtr = currentLimbChoice;
   }
 
-  public int GetAttackDamage(Fighter target) // Calculates damage dealt, returns value as int.
+  public int GetCurrentAttackDamage(Fighter target) // Calculates damage dealt, returns value as int.
   {
     int damage = 1; // Default value for initialization.
     
@@ -208,7 +207,7 @@ public class Fighter {
   }
   */
  
-  public int GetAttackSpeed() // Return speed of attack for current turn's Attack & Limb choices.
+  public int GetCurrentAttackSpeed() // Return speed of attack for current turn's Attack & Limb choices.
   {
     double attackSpeedDouble = speed * currentAttackChoice.GetSpeedMod(currentLimbChoice);
     if (isBurntOut == true)
