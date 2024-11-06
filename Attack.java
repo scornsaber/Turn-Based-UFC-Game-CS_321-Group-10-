@@ -8,22 +8,25 @@ package com.mycompany._prog1;
 // All damage calculation will be handled in Fighter using the
 // attributes of a given Attack object.
 
-public class Attack {
+public class Attack
+{
   private String name = "";
   private static final double DEFAULTMODIFIER = 1.0;
   private double baseDamageMod = DEFAULTMODIFIER;
   private double baseSpeedMod = DEFAULTMODIFIER;
+  private int baseEnergyCost = 20;  // Default value. Determined in construction.
   
   public Attack() // Default constructor only for use in debugging.
   {
     name = "Default Attack";
   }
 
-  public Attack(String inName, double damageMod, double speedMod)
+  public Attack(String inName, double damageMod, double speedMod, int energyCost)
   {
     name = inName;
     baseDamageMod = damageMod;
     baseSpeedMod = speedMod;
+    baseEnergyCost = energyCost;
   }
   
   public String GetName()
@@ -53,6 +56,10 @@ public class Attack {
       case SHIN -> speedMod = 0.0;  // NOT YET FULLY IMPLEMENTED
     }
     return baseSpeedMod * speedMod;
+  }
+  public int GetBaseEnergyCost()
+  {
+    return baseEnergyCost;
   }
 }
 

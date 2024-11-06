@@ -76,7 +76,7 @@ public class Fighter {
     countryOfOrigin = country;
     
     // Stat allocation:
-    attack += 2*force;            chip ++ force;                  // Force
+    attack += 2*force;            chip += force;                  // Force
     recovery += 3*intelligence;   grappleResist += intelligence;  // Intelligence
     defense += 3*grit;            chipResist += grit;             // Grit
     grapple += 3*hold;                                            // Hold
@@ -99,16 +99,22 @@ public class Fighter {
   {
     return HP;
   }
+  public int GetEnergy()
+  {
+    return energy;
+  }
   public void Restore() // For use after Battle finishes.
   {
     HP = baseHP;
     energy = baseEnergy;
+    isBurntOut = false;
   }
   public void DealDamage(int damage)  // Subtracts damage from HP.
   {                                   // Update 6th November 3:06PM: Ethan Watts changed return type from int to void.
     HP = HP - damage;
     if (HP<0) {HP = 0;}
   }
+  public void 
   
   public int GetDefense()
   {
@@ -127,15 +133,16 @@ public class Fighter {
   {
     isBlocking = input;
   }
-  public boolean GetBurnout()         // Burnout is handled completely by Battle class.
+  public boolean CheckBurnout()         // Burnout is handled completely by Battle class.
   {
+    if (energy == 0)
+    {
+      isBurntOut = true;
+    }    
+    
     return isBurntOut;
   }
-  public void SetBurnout(boolean input)
-  {
-    isBurntOut = input;
-  }
-  
+
   public void ChooseAttack()        // This will be implented later and handled in GUI.
   {
     currentAttackChoice = Attack(); // PLACEHOLDER VALUE. WILL NOT BE PRESENT IN FINAL FUNCTION.
@@ -220,6 +227,28 @@ public class Fighter {
     }
     int attackSpeed = (int) Math.round(attackSpeedDouble);
     return attackSpeed;
+  }
+
+  public void DoEnergyCost()
+  {
+    // First, get the energy cost given the current Attack and Limb choice.
+    int energyCost = currentAttackChoice.GetEnergyCost(currentLimbChoice);
+
+    // Next, account for user Fitness stat.
+    double effectiveFitness = fitness - DEFAULTSTAT + 1.0;  // Fitness isn't set initially to 1. This is done
+                                                            // for easier readability for the player.
+                                                            // This value should always equate to at least 1.
+    double energyMod = effectiveFitness * 0.05;
+
+    // Do energy calculation.
+    energyCost = (int) Math.round(energyCost - (energyCost * energyMod));
+
+    //Subtract energy cost from Fighter energy.
+    energy -= energyCost;
+    if (energy < 0)
+    {
+      energy = 0;
+    }
   }
 
   // Old attack speed function, changed by Ethan Watts 6th November, 2:54 PM

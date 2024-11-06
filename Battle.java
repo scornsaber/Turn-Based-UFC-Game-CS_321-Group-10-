@@ -79,6 +79,10 @@ public class Battle
       // Deal damage to slower fighter.
       *slowerFighter.DealDamage(fasterAttackDamage);
       System.out.println(*fasterFighter.GetName() + " attacks " + *slowerFighter.GetName() + " dealing " + fasterAttackDamage + " damage.");
+
+      // Subtract energy cost, check for burnout.
+      *fasterFighter.
+
       // Check for KO on slower fighter.
       if (*slowerFighter.GetHP() <= 0)
       {
