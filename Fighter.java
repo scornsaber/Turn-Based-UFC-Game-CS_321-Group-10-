@@ -46,6 +46,11 @@ public class Fighter {
   private boolean isBurntOut = false; // Handled in Battle. Fighter becomes burnt out if they reach
                                       // 0 energy. Damage and defense are drastically reduced when
                                       // burnt out, so energy management is essential to combat.
+
+  // The current choice variables are determined and stored each turn
+  // for use in damage dealing after speed calculation.
+  private Attack currentAttackChoice = Attack();  
+  private Limb currentLimbChoice = ARM;           
   
   public Fighter(String inName)       // Basic constructor. Will update later.
   {
@@ -132,13 +137,49 @@ public class Fighter {
     isBurntOut = input;
   }
   
-  public void GetAttackChoice(Attack &attackChoice, Limb &limbChoice) // This will be implented later and handled in GUI.
+  public void ChooseAttack()        // This will be implented later and handled in GUI.
   {
-    attackChoice = Attack();  // PLACEHOLDER VALUE. WILL NOT BE PRESENT IN FINAL FUNCTION.
-    limbPtr = ARM;            // PLACEHOLDER VALUE. WILL BE DIFFERENT IN FINAL FUNCTION.
+    currentAttackChoice = Attack(); // PLACEHOLDER VALUE. WILL NOT BE PRESENT IN FINAL FUNCTION.
+    currentLimbChoice = ARM;        // PLACEHOLDER VALUE. WILL BE DIFFERENT IN FINAL FUNCTION
   }
 
-  public int GetAttackDamage(Attack attackChoice, Fighter target, Limb limb) // Calculates damage dealt, returns value as long int.
+  public void GetAttackLimbChoices(Attack &attackChoice, Limb &limbChoice)
+  {
+    attackChoice = currentAttackChoice;
+    limbPtr = currentLimbChoice;
+  }
+
+  public int GetAttackDamage(Fighter target) // Calculates damage dealt, returns value as int.
+  {
+    int damage = 1; // Default value for initialization.
+    
+    // First, calculate effective modifiers for each.
+    double effectiveAttack = attack;
+    if (currentAttackChoice.GetDamageMod(currentLimbChoice)>1.0) // Chosen attack is a 'strong attack'.
+    {
+      effectiveAttack = attack + (strongAttack * 0.05);
+    }
+    if (isBurntOut == true) // Attack is halved if player is burnt out.
+    {
+      effectiveAttack = effectiveAttack * 0.5;
+    }
+    double effectiveDefense = target.GetDefense();
+    if (target.GetBlock() == true)
+    {
+      effectiveDefense = effectiveDefense*(target.GetBlockMod() - (0.1*chip));
+    }
+    
+    // Now do the calculations.
+    final int DAMAGECONSTANT = 5; // Arbitrary number used in video game damage calculation functions.
+                                  // 5 was found empirically to be the most effective for this game.
+    damage = (int) Math.round((((13*effectiveAttack)-(8*effectiveDefense))/DAMAGECONSTANT)*currentAttackChoice.GetDamageMod(currentLimbChoice));
+    if (damage < 1) {damage = 1;}
+    return damage;                // Returns damage to Battle, which will then apply it to Fighters in the correct order.
+  }  
+
+  // Old attack damage function, changed by Ethan Watts 6th November, 2:57 PM
+  /*
+  public int GetAttackDamage(Attack attackChoice, Fighter target, Limb limb) // Calculates damage dealt, returns value as int.
   {
     int damage = 1; // Default value for initialization.
     
@@ -165,7 +206,25 @@ public class Fighter {
     if (damage < 1) {damage = 1;}
     return damage;                // Returns damage to Battle, which then applies it to Fighters in the correct order.
   }
-  
+  */
+ 
+  public int GetAttackSpeed() // Return speed of attack for current turn's Attack & Limb choices.
+  {
+    double attackSpeedDouble = speed * currentAttackChoice.GetSpeedMod(currentLimbChoice);
+    if (isBurntOut == true)
+    {
+      attackSpeed *= 0.5; // Speed is halved if user is burnt out.
+    }
+    if (attackSpeed < 1) // This should never happen.
+    {
+      attackSpeed = 1;
+    }
+    int attackSpeed = (int) Math.round(attackSpeedDouble);
+    return attackSpeed;
+  }
+
+  // Old attack speed function, changed by Ethan Watts 6th November, 2:54 PM
+  /*
   public int GetAttackSpeed(Attack attackChoice, Limb limb) // Gets speed of a certain Attack by this fighter.
   {                                                         // Used in Battle class.
     int attackSpeed = (int) Math.round(speed * attackChoice.GetSpeedMod(limb));
@@ -179,7 +238,7 @@ public class Fighter {
     }
     return attackSpeed;
   }
-
+  */
 
   
   // I only use the below function in personal tests. Will be removing later.

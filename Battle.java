@@ -61,6 +61,11 @@ public class Battle {
               *faster = fighter1;
               *slower = fighter2;
             }
+          
+            // Calculate damage values.
+
+            // Deal damage to slower fighter.
+            //*slower.DealDamage(*faster.GetAttackDamage(fighter1Attack,*slower,))
 
             double damageDealt = fighter1.punch();
             fighter2.update(damageDealt);
