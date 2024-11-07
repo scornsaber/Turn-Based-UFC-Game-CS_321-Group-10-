@@ -281,7 +281,8 @@ public class Fighter {
   }
 
    // Method to save fighter's information to a file added by Caleb
-    public void SaveToFile(String fileName) {
+     public void saveToFile(String fighterName) {
+        String fileName = fighterName + ".txt";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             writer.write("Name: " + name + "\n");
             writer.write("HP: " + HP + "\n");
@@ -307,8 +308,9 @@ public class Fighter {
     }
 
     // Static method to load fighter's information from a file
-    public static Fighter LoadFromFile(String fileName) {
-        Fighter loadedFighter = new Fighter("");
+    public static Fighter loadFromFile(String fighterName) {
+        String fileName = fighterName + ".txt";
+        Fighter loadedFighter = new Fighter(fighterName);
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
             while ((line = reader.readLine()) != null) {
