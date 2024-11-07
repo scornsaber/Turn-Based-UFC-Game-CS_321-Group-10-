@@ -57,9 +57,18 @@ public class Attack
     }
     return baseSpeedMod * speedMod;
   }
-  public int GetBaseEnergyCost()
-  {
-    return baseEnergyCost;
+  public double GetEnergyCost(Limb limb)  // This returns a double instead of an int because
+  {                                       // there is additional calculation handled in Fighter.
+    double energyCost = baseEnergyCost + 0.0;
+    double energyMod = 1.0;
+    switch(limb)
+    {      
+      case ARM -> energyMod = 0.7;
+      case LEG -> energyMod = 1.3;
+      case ELBOW -> energyMod = 0.0; // NOT YET FULLY IMPLEMENTED
+      case SHIN -> energyMod = 0.0;  // NOT YET FULLY IMPLEMENTED
+    }
+    return energyCost * energyMod;
   }
 }
 
