@@ -3,10 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany._prog1;
-
+import java.util.ArrayList;
 /**
  * TBD at future date
- * 
+ * Fighter Format:Fighter(String inName, Country country, int force, int intelligence, int grit, int hold, int technique, int execution, int resilience)
  */
 public class Story_Mode 
 {
@@ -15,8 +15,8 @@ public class Story_Mode
         ArrayList<Fighter> opponents = new ArrayList<Fighter>();
         fillOpponents();
     }
-    public void fillOpponents ()
+    public static void fillOpponents ()
     {
-        opponents.add(Fighter("Bob"));
+        opponents.add(Fighter("manman", MEXICO, 2, 0, 9, 1, 2, 9, 9));
     }
 }
