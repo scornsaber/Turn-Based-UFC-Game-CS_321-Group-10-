@@ -20,7 +20,7 @@ public class Story_Mode
         opponents.add(Fighter("manman", MEXICO, 2, 0, 9, 1, 2, 9, 9));
         opponents.add(Fighter("manman", MEXICO, 2, 0, 9, 1, 2, 9, 9));
         opponents.add(Fighter("manman", MEXICO, 2, 0, 9, 1, 2, 9, 9));
-        opponents.add(Fighter("manman", MEXICO, 2, 0, 9, 1, 2, 9, 9));
+        opponents.add(Fighter("manmn", MEXICO, 2, 0, 9, 1, 2, 9, 9));
         opponents.add(Fighter("manman", MEXICO, 2, 0, 9, 1, 2, 9, 9));
         opponents.add(Fighter("manman", MEXICO, 2, 0, 9, 1, 2, 9, 9));
         opponents.add(Fighter("Fedora Emily", RUSSIA, 7, 10, 8, 4, 5, 6, 9));
